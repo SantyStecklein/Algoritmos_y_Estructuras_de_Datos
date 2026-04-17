@@ -1,5 +1,5 @@
 # 5. Desarrollar una función que permita convertir un número romano en un número decimal.
-# XIV = 14, si X es mayor a I = X + (recursivo), si I es menor a V = -I + (recursivo), si V es mayor a 0 = V...
+# XIV = 14, si X es mayor o igual a I = X + (recursivo), si I es menor a V = -I + (recursivo), si V es mayor o igual a 0 = V...
 
 # I = 1
 # V = 5
