@@ -59,12 +59,12 @@ def convertir_num(romano: str):
     return resultado
 
 # Ejemplos
-# convertir_num("II")
-# convertir_num("XL")
-# convertir_num("MDCC")
-# convertir_num("VVV")
-# convertir_num("XXXX")
-# convertir_num("IIX")
+convertir_num("II")
+convertir_num("XL")
+convertir_num("MDCC")
+convertir_num("VVV")
+convertir_num("XXXX")
+convertir_num("IIX")
 
 # 22. El problema de la mochila Jedi. Suponga que un Jedi (Luke Skywalker, Obi-Wan Kenobi, Rey u otro, el que más le guste) está atrapado, 
 # pero muy cerca está su mochila que contiene muchos objetos. Implementar una función recursiva llamada “usar la fuerza” que le permita al 
@@ -95,6 +95,6 @@ def usar_la_fuerza(mochila: str, cont= 0) -> str:
         cont+= 1
         return usar_la_fuerza(mochila, cont)
 
-   
+
 usar_la_fuerza(mochila)
 
