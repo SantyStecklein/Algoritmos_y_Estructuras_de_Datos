@@ -31,7 +31,7 @@ def validar_resta(s: str) -> bool:
                 return False
     return True
 
-def calcular(s: str) -> int: # Funcion recursiva principal.
+def calcular(s: str) -> int: # Funcion recursiva.
     if len(s) == 0:
         return 0
     if len(s) == 1:
@@ -59,12 +59,12 @@ def convertir_num(romano: str):
     return resultado
 
 # Ejemplos
-convertir_num("II")
-convertir_num("XL")
-convertir_num("MDCC")
-convertir_num("VVV")
-convertir_num("XXXX")
-convertir_num("IIX")
+# convertir_num("II")
+# convertir_num("XL")
+# convertir_num("MDCC")
+# convertir_num("VVV")
+# convertir_num("XXXX")
+# convertir_num("IIX")
 
 # 22. El problema de la mochila Jedi. Suponga que un Jedi (Luke Skywalker, Obi-Wan Kenobi, Rey u otro, el que más le guste) está atrapado, 
 # pero muy cerca está su mochila que contiene muchos objetos. Implementar una función recursiva llamada “usar la fuerza” que le permita al 
@@ -77,27 +77,24 @@ mochila= ["Zapatilla", "Cepillo de dientes", "Celular", "Sable de luz", "Campera
 
 def usar_la_fuerza(mochila: str, cont= 0) -> str:
     
-    if not mochila:
-        print('No hay elementos en la mochila.')
+    if not mochila: # Punto B
+        print('No se encontro el Sable de luz en la mochila.')
         return None
-    
-    if mochila[0] != "Sable de luz": # Punta A
+
+    if mochila[0] == "Sable de luz": # Punto B
+        if cont == 0:
+            print('El sable fue el primer objeto extraido.')
+        else:
+            print('Se extrajo el Sable de luz.')
+            print(f'Para encontrar el Sable de luz fue necesario extraer {cont} objeto/os antes del mismo.')
+        return None
+
+    if mochila[0] != "Sable de luz": # Punto A (funcion recursiva)
         objeto_extraido= mochila.pop(0)
-        print(f'El elemento extraido es {objeto_extraido}')
+        print(f'El elemento extraido es {objeto_extraido}.')
         cont+= 1
         return usar_la_fuerza(mochila, cont)
 
-    if mochila[0] == "Sable de luz":
-        print(f'Se extrajo el Sable de luz.')
-        return cont
-
-    
-resultado= usar_la_fuerza(mochila)
-
-if resultado == 0: # Punto B
-    print('El sable fue el primer objeto extraido.')
-elif resultado is not None:
-    print(f'Para encontrar el Sable de luz fue necesario extraer {resultado} objeto/os antes del mismo.')
-else:
-    print('No se encontro el Sable de luz en la mochila.')
+   
+usar_la_fuerza(mochila)
 
