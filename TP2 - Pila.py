@@ -32,6 +32,7 @@ def registrar_movimientos(pila_historial: Stack, pasos: int, direc: str) -> None
     
     print(f"Se registro/registraron: {pasos} pasos en la direccion {direc}.")
 
+
 def retorno(pila_historial: Stack) -> None:
     
     while pila_historial.size() > 0:
@@ -42,6 +43,7 @@ def retorno(pila_historial: Stack) -> None:
         direccion_regreso= direccion_opuesto[direccion]
         
         print(f"Para volver al lugar de partida: mover {pasos} pasos en la direccion {direccion_regreso}.")
+
 
 print("EJERCICIO 20:")
 
@@ -165,7 +167,7 @@ def per_CDG(pila: Stack) -> None: # Punto D
         pila.push(pila_aux.pop())
     
     if no_hay_per_CDG:
-        print("No hay personajes cuyo nombre empiece con C, D o G")
+        print("No hay personajes cuyo nombre empiece con C, D o G.")
 
 
 print("EJERCICIO 24:")
