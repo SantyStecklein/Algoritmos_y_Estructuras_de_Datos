@@ -56,6 +56,7 @@ class List(list):
         return len(self)
 
     def filter_contain_on_bio(self, values):
+        resultados= []
         for element in self:
             bio_min = element.bio.lower()
 
@@ -64,15 +65,23 @@ class List(list):
             palabras_bio = bio_limpia.split()
 
             if any(value in palabras_bio for value in values):
-                print(element)
+                resultados.append(element)
+
+        return resultados
 
     def filter_start_with(self, values):
-        hay_elemento= False
+        listado = []
         
+        if isinstance(values, str):
+            valores_buscados = values.lower()
+        else:
+            valores_buscados = tuple(letra.lower() for letra in values)
+
         for element in self:
-            if element.name.startswith(values):
-                hay_elemento= True
-                print(element.name)
-        
-        if not hay_elemento:
+            if element.name.lower().startswith(valores_buscados):
+                listado.append(element)
+                
+        if not listado:
             print("No hay elemento/os que comiencen con el/los caracter/res ingresado/os.")
+            
+        return listado
