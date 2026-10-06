@@ -1,5 +1,6 @@
 from queue_ import Queue
 from stack import Stack
+from heap import Heap
 
 # 10. Dada una cola con las notificaciones de las aplicaciones de redes sociales de un Smartphone,
 # de las cual se cuenta con la hora de la notificación, la aplicación que la emitió y el mensaje,
@@ -106,6 +107,48 @@ print()
 print()
 print()
 
+
+# 16. Utilice cola de prioridad, para atender la cola de impresión tomando en cuenta el siguiente
+# criterio (1- empleados, 2- staff de tecnologías de la información “TI”, 3- gerente), y resuelva la
+# siguiente situación:
+#   a. cargue tres documentos de empleados (cada documento se representa solamente con
+#      un nombre).
+#   b. imprima el primer documento de la cola (solamente mostrar el nombre de este por pantalla).
+#   c. cargue dos documentos del staff de TI.
+#   d. cargue un documento del gerente.
+#   e. imprima los dos primeros documentos de la cola.
+#   f. cargue dos documentos de empleados y uno de gerente.
+#   g. imprima todos los documentos de la cola de impresión.
+
+queue_prioridad= Heap()
+
+queue_prioridad.arrive("Trabajo Ingenieria.docx", 1) # Punto A
+queue_prioridad.arrive("Trabajo POO.pdf", 1) # Punto A
+queue_prioridad.arrive("Trabajo AyED.py", 1) # Punto A
+
+prioridad, documento= queue_prioridad.elements[0] # Punto B
+print(documento) # Punto B
+print()
+
+queue_prioridad.arrive("Auditoria Trabajos Ingenieria.pdf", 2) # Punto C
+queue_prioridad.arrive("Auditoria Trabajos AyED.pdf", 2) # Punto C
+
+queue_prioridad.arrive("Visión General de Auditorias.pdf", 3) # Punto D
+
+prioridad1, primer_documento= queue_prioridad.attention() # Punto E
+prioridad2, segundo_documento= queue_prioridad.attention() # Punto E
+# queue_prioridad.arrive(primer_documento, prioridad1) # Punto E (puede ir o no dependiendo de si se quiere que los documentos vuelvan a la queue)
+# queue_prioridad.arrive(segundo_documento, prioridad2) # Punto E (puede ir o no dependiendo de si se quiere que los documentos vuelvan a la queue)
+print(primer_documento) # Punto E
+print(segundo_documento) # Punto E
+print()
+
+queue_prioridad.arrive("Trabajo Diseño.docx", 1) # Punto F
+queue_prioridad.arrive("Trabajo Discretas.pdf", 1) # Punto F
+queue_prioridad.arrive("Visión General de la Empresa.pdf", 3) # Punto F
+
+queue_ordenada= queue_prioridad.heap_sort() # Punto G
+print(queue_ordenada) # Punto G
 
 # 22. Se tienen una cola con personajes de Marvel Cinematic Universe (MCU), de los cuales se conoce
 # el nombre del personaje, el nombre del superhéroe y su género (Masculino M y Femenino
