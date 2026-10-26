@@ -60,3 +60,36 @@ superheroes = [
     {'nombre': 'Starfire', 'año_aparicion': 1980, 'casa_comic': 'DC', 'biografia': 'Princesa alienígena de Tamaran, dispara rayos de energía.'},
     {'nombre': 'Beast Boy', 'año_aparicion': 1965, 'casa_comic': 'DC', 'biografia': 'Héroe de piel verde que puede transformarse en cualquier animal.'},
 ]
+
+mcu_characters = [
+    {"name": "Iron Man", "is_hero": True},
+    {"name": "Captain America", "is_hero": True},
+    {"name": "Captain Marvel", "is_hero": True},
+    {"name": "Thor", "is_hero": True},
+    {"name": "Hulk", "is_hero": True},
+    {"name": "Black Widow", "is_hero": True},
+    {"name": "Hawkeye", "is_hero": True},
+    {"name": "Spider-Man", "is_hero": True},
+    {"name": "Black Panther", "is_hero": True},
+    {"name": "Ant-Man", "is_hero": True},
+    {"name": "Wasp", "is_hero": True},
+    {"name": "Star-Lord", "is_hero": True},
+    {"name": "Gamora", "is_hero": True},
+    {"name": "Groot", "is_hero": True},
+    {"name": "Rocket", "is_hero": True},
+    {"name": "Drax", "is_hero": True},
+    {"name": "Vision", "is_hero": True},
+    {"name": "Doctor Strang", "is_hero": True}, # Error intencional
+    {"name": "Scarlet Witch", "is_hero": True},
+    {"name": "Falcon", "is_hero": True},
+    {"name": "Thanos", "is_hero": False},
+    {"name": "Loki", "is_hero": False},
+    {"name": "Ultron", "is_hero": False},
+    {"name": "Hela", "is_hero": False},
+    {"name": "Red Skull", "is_hero": False},
+    {"name": "Vulture", "is_hero": False},
+    {"name": "Killmonger", "is_hero": False},
+    {"name": "Mysterio", "is_hero": False},
+    {"name": "Kang", "is_hero": False},
+    {"name": "Ronan", "is_hero": False}
+]
