@@ -1,5 +1,6 @@
 from tree import BinaryTree
 from Superheroes import mcu_characters
+from criaturas import criaturas_mitologicas
 
 # 5. Dado un árbol con los nombre de los superhéroes y villanos de la saga Marvel Cinematic Universe
 #    (MCU), desarrollar un algoritmo que contemple lo siguiente:
@@ -16,7 +17,7 @@ from Superheroes import mcu_characters
 #             I. determinar cuántos nodos tiene cada árbol;
 #             II. realizar un barrido ordenado alfabéticamente de cada árbol.
 
-arbol= BinaryTree()
+# arbol= BinaryTree()
 
 class Hero:
     def __init__(self, nombre, es_hero):
@@ -26,9 +27,9 @@ class Hero:
     def __str__(self):
         return f"Nombre: {self.name} | ¿Es Heroe?: {self.is_hero}"
 
-for heroes in mcu_characters: # Punto A
-    nuevo_heroe= Hero(heroes["name"], heroes["is_hero"])
-    arbol.insert_node(nuevo_heroe.name, nuevo_heroe.is_hero)
+# for heroes in mcu_characters: # Punto A
+#     nuevo_heroe= Hero(heroes["name"], heroes["is_hero"])
+#     arbol.insert_node(nuevo_heroe.name, nuevo_heroe.is_hero)
 
 # arbol.preorden()
 
@@ -110,12 +111,12 @@ def busqueda_proxy(arbol, search: str): # Punto E
     
     return None, None
 
-nombre_actual, heroe= busqueda_proxy(arbol, "Doc") # Punto E
+# nombre_actual, heroe= busqueda_proxy(arbol, "Doc") # Punto E
 
-if nombre_actual is not None and heroe is not None: # Punto E
-    arbol.delete_node(nombre_actual)
-    correccion_Doctor_Strange= Hero("Doctor Strange", heroe)
-    arbol.insert_node(correccion_Doctor_Strange.name, correccion_Doctor_Strange.is_hero)
+# if nombre_actual is not None and heroe is not None: # Punto E
+#     arbol.delete_node(nombre_actual)
+#     correccion_Doctor_Strange= Hero("Doctor Strange", heroe)
+#     arbol.insert_node(correccion_Doctor_Strange.name, correccion_Doctor_Strange.is_hero)
 # arbol.preorden()
 
 def super_descendente(arbol) -> None: # Punto F
@@ -155,14 +156,14 @@ def separar_arboles(arbol): # Punto G
 
     return lista_superheroe, lista_villano
 
-arbol_superheroe= BinaryTree() # Punto G
-arbol_villano= BinaryTree() # Punto G
-superheroe, villano= separar_arboles(arbol) # Punto G
+# arbol_superheroe= BinaryTree() # Punto G
+# arbol_villano= BinaryTree() # Punto G
+# superheroe, villano= separar_arboles(arbol) # Punto G
 
-for heroe in superheroe: # Punto G
-    arbol_superheroe.insert_node(heroe)
-for vill in villano: # Punto G
-    arbol_villano.insert_node(vill)
+# for heroe in superheroe: # Punto G
+#     arbol_superheroe.insert_node(heroe)
+# for vill in villano: # Punto G
+#     arbol_villano.insert_node(vill)
 
 def contar(arbol) -> int: # Punto G - I
     
@@ -194,12 +195,103 @@ def contar(arbol) -> int: # Punto G - I
 #     print(f"La cantidad de nodos que tiene el arbol de villanos es {nodos_villano}")
 # else:
 #     print("El arbol de villanos no tiene nodos")
-# II. realizar un barrido ordenado alfabéticamente de cada árbol.
-print("Barrido ordenado alfabéticamente del arbol de superheroes:") # Punto G - II
-arbol_superheroe.inorden()
-print()
-print("Barrido ordenado alfabéticamente del arbol de villanos:") # Punto G - II
-arbol_villano.inorden()
+
+# print("Barrido ordenado alfabéticamente del arbol de superheroes:") # Punto G - II
+# arbol_superheroe.inorden()
+# print()
+# print("Barrido ordenado alfabéticamente del arbol de villanos:") # Punto G - II
+# arbol_villano.inorden()
+
+
+# 23. Implementar un algoritmo que permita generar un árbol con los datos de la siguiente tabla y
+#     resuelva las siguientes consultas:
+#         a. listado inorden de las criaturas y quienes la derrotaron;
+#         b. se debe permitir cargar una breve descripción sobre cada criatura;
+#         c. mostrar toda la información de la criatura Talos;
+#         d. determinar los 3 héroes o dioses que derrotaron mayor cantidad de criaturas;
+#         e. listar las criaturas derrotadas por Heracles;
+#         f. listar las criaturas que no han sido derrotadas;
+#         g. además cada nodo debe tener un campo “capturada” que almacenará el nombre del héroe
+#            o dios que la capturo;
+#         h. modifique los nodos de las criaturas Cerbero, Toro de Creta, Cierva Cerinea y Jabalí de
+#            Erimanto indicando que Heracles las atrapó;
+#         i. se debe permitir búsquedas por coincidencia;
+#         j. eliminar al Basilisco y a las Sirenas;
+#         k. modificar el nodo que contiene a las Aves del Estínfalo, agregando que Heracles
+#            derroto a varias;
+#         l. modifique el nombre de la criatura Ladón por Dragón Ladón;
+#         m. realizar un listado por nivel del árbol;
+#         n. muestre las criaturas capturadas por Heracles.
+
+arbol_creaturas= BinaryTree()
+
+class Criaturas:
+    def __init__(self, nom, derrotado, descripcion, capturado):
+        self.name= nom
+        self.lose= derrotado
+        self.desc= descripcion
+        self.cap= capturado
+
+    def __str__(self):
+        return f"Nombre: {self.name} | Derrotado por: {self.lose} | Descripción: {self.desc} | Capturado por: {self.cap}"
+
+for creatures in criaturas_mitologicas:
+    nueva_criatura= Criaturas(creatures["nombre"], creatures["derrotado_por"], creatures["descripcion"], creatures["capturada_por"])
+    arbol_creaturas.insert_node(nueva_criatura.name, nueva_criatura)
+
+def inorden_derrota(arbol) -> None: # Punto A
+
+    def __inorden_derrota(root):
+        if root.left is not None:
+            __inorden_derrota(root.left)
+
+        print(f"Nombre: {root.value} | Derrotado por: {root.other_values[0]}")
+
+        if root.right is not None:
+            __inorden_derrota(root.right)
+
+    __inorden_derrota(arbol.root)
+
+# print("Listado inorden de las criaturas y quienes la derrotaron: ") # Punto A
+# inorden_derrota(arbol_creaturas) # Punto A
+
+def cargar_desc(arbol): # Punto B
+
+    criatura= str(input("Ingrese la criatura que desea cambiar la descripcion: "))
+    creature= arbol.search(criatura)
+    
+    if creature is not None:
+        creature.other_values.desc= input("Ingrese la descripcion para esta criatura: ")
+    else:
+        print("La criatura ingresada no existe o no se encuentra en el arbol.")
+
+# cargar_desc(arbol_creaturas) # Punto B
+# arbol_creaturas.inorden() # Punto B
+
+# creature= arbol_creaturas.search("Talos") # Punto C
+
+# if creature is not None: # Punto C
+#     print(creature.other_values)
+# else: # Punto C
+#     print("La criatura ingresada no existe o no se encuentra en el arbol.")
+# d. determinar los 3 héroes o dioses que derrotaron mayor cantidad de criaturas;
+# def mas_derrotados(arbol):
+
+#     def __mas_derrotados(root):
+#         if root.other_values.lose is not None:
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

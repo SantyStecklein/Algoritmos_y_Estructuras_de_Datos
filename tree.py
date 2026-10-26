@@ -108,11 +108,11 @@ class BinaryTree():
             aux = None
             if root is not None:
             
-                if root.value == value:
+                if root.value.upper() == value.upper():
                     aux = root
-                elif value < root.value:
+                elif value.upper() < root.value.upper():
                     aux = __search(root.left, value)
-                elif value > root.value:
+                elif value.upper() > root.value.upper():
                     aux = __search(root.right, value)
 
             return aux
