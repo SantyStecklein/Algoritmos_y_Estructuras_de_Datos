@@ -449,8 +449,8 @@ def capturados_por(arbol, dios: str) -> None: # Punto N
         if root.left is not None:
             __capturados_por(root.left, dio)
 
-        if root.other_values.lose is not None:    
-            if root.other_values.lose.upper() == dio.upper():
+        if root.other_values.cap is not None:    
+            if root.other_values.cap.upper() == dio.upper():
                 capturados.append(root.value)
 
         if root.right is not None:
