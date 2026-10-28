@@ -440,8 +440,8 @@ cambiar_nombre(arbol_creaturas, "Ladón", "Dragón Ladón") # Punto L
 
 # print("Listado del arbol por nivel: ") # Punto M
 # arbol_creaturas.by_level() # Punto M
-# n. muestre las criaturas capturadas por Heracles.
-def capturados_por(arbol, dios: str) -> None: # Punto E
+
+def capturados_por(arbol, dios: str) -> None: # Punto N
 
     capturados= []
 
@@ -465,7 +465,7 @@ def capturados_por(arbol, dios: str) -> None: # Punto E
     else:
         print(f"Quien se ingreso no capturo a ninguna criatura.")
 
-capturados_por(arbol_creaturas, "heracles")
+capturados_por(arbol_creaturas, "heracles") # Punto N
 
 
 
