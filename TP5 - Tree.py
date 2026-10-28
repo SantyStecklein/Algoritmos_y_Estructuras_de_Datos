@@ -230,13 +230,13 @@ class Criaturas:
         self.name= nom
         self.lose= derrotado
         self.desc= descripcion
-        self.cap= capturado
+        self.cap= capturado # Punto G
 
     def __str__(self):
-        return f"Nombre: {self.name} | Derrotado por: {self.lose} | Descripción: {self.desc} | Capturado por: {self.cap}"
+        return f"Nombre: {self.name} | Derrotado por: {self.lose} | Descripción: {self.desc} | Capturado por: {self.cap}" # Punto G
 
 for creatures in criaturas_mitologicas:
-    nueva_criatura= Criaturas(creatures["nombre"], creatures["derrotado_por"], creatures["descripcion"], creatures["capturada_por"])
+    nueva_criatura= Criaturas(creatures["nombre"], creatures["derrotado_por"], creatures["descripcion"], creatures["capturada_por"]) # Punto G
     arbol_creaturas.insert_node(nueva_criatura.name, nueva_criatura)
 
 def inorden_derrota(arbol) -> None: # Punto A
@@ -274,24 +274,198 @@ def cargar_desc(arbol): # Punto B
 #     print(creature.other_values)
 # else: # Punto C
 #     print("La criatura ingresada no existe o no se encuentra en el arbol.")
-# d. determinar los 3 héroes o dioses que derrotaron mayor cantidad de criaturas;
-# def mas_derrotados(arbol):
 
-#     def __mas_derrotados(root):
-#         if root.other_values.lose is not None:
+def mas_derrotados(arbol) -> None: # Punto D
 
+    conteo = {}
 
+    def __mas_derrotados(root):
+        if root is not None:
+            __mas_derrotados(root.left)
+            
+            dios = root.other_values.lose
+            if dios is not None and dios != "-":
+                if dios in conteo:
+                    conteo[dios] += 1
+                else:
+                    conteo[dios] = 1
+                    
+            __mas_derrotados(root.right)
 
+    __mas_derrotados(arbol.root)
 
+    print("Los 3 héroes o dioses que derrotaron mayor cantidad de criaturas:")
+    for i in range(3):
+        max_dios = None
+        max_cantidad = -1
+    
+        for dios, cantidad in conteo.items():
+            if cantidad > max_cantidad:
+                max_cantidad = cantidad
+                max_dios = dios
+                
+        if max_dios is not None:
+            print(f"- {max_dios}: {max_cantidad}")
+            del conteo[max_dios]
 
+# mas_derrotados(arbol_creaturas) # Punto D
 
+def derrotados_por(arbol, dios: str) -> None: # Punto E
 
+    derrotados= []
 
+    def __derrotados_por(root, dio):
+        if root.left is not None:
+            __derrotados_por(root.left, dio)
 
+        if root.other_values.lose is not None:    
+            if root.other_values.lose.upper() == dio.upper():
+                derrotados.append(root.value)
 
+        if root.right is not None:
+            __derrotados_por(root.right, dio)
 
+    __derrotados_por(arbol.root, dios)
 
+    if len(derrotados) > 0:
+        print(f"Las criaturas que derroto {dios} son:")
+        for creature in derrotados:
+            print(creature)
+    else:
+        print(f"Quien se ingreso no derroto a ninguna criatura.")
 
+# derrotados_por(arbol_creaturas, "Heracles") # Punto E
+
+def criaturas_no_derrotadas(arbol): # Punto F
+
+    no_derrotados= []
+
+    def __criaturas_no_derrotadas(root):
+        if root.left is not None:
+            __criaturas_no_derrotadas(root.left)
+
+        if root.other_values.lose is None:    
+            no_derrotados.append(root.value)
+
+        if root.right is not None:
+            __criaturas_no_derrotadas(root.right)
+
+    __criaturas_no_derrotadas(arbol.root)
+
+    if len(no_derrotados) > 0:
+        print(f"Las criaturas que no fueron derrotadas son:")
+        for creature in no_derrotados:
+            print(creature)
+    else:
+        print(f"Todas las criaturas en el arbol fueron derrotadas.")
+
+# criaturas_no_derrotadas(arbol_creaturas) # Punto F
+
+def cargar_captura(arbol, criatura: str, capturo: str): # Punto H
+
+    creature= arbol.search(criatura)
+    
+    if creature is not None:
+        creature.other_values.cap= capturo
+    else:
+        print(f"La criatura {criatura} no existe o no se encuentra en el arbol.")
+
+cargar_captura(arbol_creaturas, "Cerbero", "Heracles") # Punto H
+cargar_captura(arbol_creaturas, "Toro de Creta", "Heracles") # Punto H
+cargar_captura(arbol_creaturas, "Cierva de Cerinea", "Heracles") # Punto H
+cargar_captura(arbol_creaturas, "Jabalí de Erimanto", "Heracles") # Punto H
+
+# arbol_creaturas.inorden()
+
+# i. se debe permitir búsquedas por coincidencia;
+def busqueda_coincidencia(arbol, search: str): # Punto I
+    
+    datos_encontrados = []
+    
+    def __busqueda_coincidencia(root, sear):
+        if root.left is not None:
+            __busqueda_coincidencia(root.left, sear)
+            
+        if sear.lower() in root.value.lower():
+            datos_encontrados.append((root.value, root.other_values))
+            
+        if root.right is not None:
+            __busqueda_coincidencia(root.right, sear)
+
+    __busqueda_coincidencia(arbol.root, search)
+    
+    return datos_encontrados
+
+# buscado= busqueda_coincidencia(arbol_creaturas, "Es") # Punto I
+
+# if len(buscado) > 0: # Punto I
+#     print("Las coincidencias encontradas son:")
+#     for coincidencias in buscado:
+#         print(coincidencias[0])
+# else: # Punto I
+#     print("No se encontraron coincidencias.")
+
+arbol_creaturas.delete_node("Basilisco") # Punto J
+arbol_creaturas.delete_node("Sirenas") # Punto J
+# print("Arbol habiendo eliminado a el Basilisco y las Sirenas: ") # Punto J
+# arbol_creaturas.inorden() # Punto J
+
+def cargar_derrota(arbol, criatura: str, derroto: str): # Punto K
+
+    creature= arbol.search(criatura)
+    
+    if creature is not None:
+        creature.other_values.lose= derroto
+    else:
+        print(f"La criatura {criatura} no existe o no se encuentra en el arbol.")
+
+cargar_derrota(arbol_creaturas, "Aves del Estínfalo", "Heracles derroto a varias") # Punto K
+# arbol_creaturas.inorden() # Punto K
+# l. modifique el nombre de la criatura Ladón por Dragón Ladón;
+def cambiar_nombre(arbol, criatura: str, nuevo_nombre: str): # Punto L
+
+    creature= arbol.search(criatura)
+    
+    if creature is not None:
+        objeto_criatura= creature.other_values
+        objeto_criatura.name= nuevo_nombre
+        arbol.delete_node(criatura)
+        arbol.insert_node(nuevo_nombre, objeto_criatura)
+    else:
+        print(f"La criatura {criatura} no existe o no se encuentra en el arbol.")
+
+cambiar_nombre(arbol_creaturas, "Ladón", "Dragón Ladón") # Punto L
+# print("Arbol cambiando Ladón por Dragón Ladón: ")
+# arbol_creaturas.inorden() # Punto L
+
+# print("Listado del arbol por nivel: ") # Punto M
+# arbol_creaturas.by_level() # Punto M
+# n. muestre las criaturas capturadas por Heracles.
+def capturados_por(arbol, dios: str) -> None: # Punto E
+
+    capturados= []
+
+    def __capturados_por(root, dio):
+        if root.left is not None:
+            __capturados_por(root.left, dio)
+
+        if root.other_values.lose is not None:    
+            if root.other_values.lose.upper() == dio.upper():
+                capturados.append(root.value)
+
+        if root.right is not None:
+            __capturados_por(root.right, dio)
+
+    __capturados_por(arbol.root, dios)
+
+    if len(capturados) > 0:
+        print(f"Las criaturas que capturo {dios} son:")
+        for creature in capturados:
+            print(creature)
+    else:
+        print(f"Quien se ingreso no capturo a ninguna criatura.")
+
+capturados_por(arbol_creaturas, "heracles")
 
 
 
