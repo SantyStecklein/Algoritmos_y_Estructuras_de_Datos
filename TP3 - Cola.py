@@ -1,6 +1,6 @@
 from queue_ import Queue
 from stack import Stack
-from heap import Heap
+from heap import HeapMax
 
 # 10. Dada una cola con las notificaciones de las aplicaciones de redes sociales de un Smartphone,
 # de las cual se cuenta con la hora de la notificación, la aplicación que la emitió y el mensaje,
@@ -120,7 +120,7 @@ print()
 #   f. cargue dos documentos de empleados y uno de gerente.
 #   g. imprima todos los documentos de la cola de impresión.
 
-queue_prioridad= Heap()
+queue_prioridad= HeapMax()
 
 queue_prioridad.arrive("Trabajo Ingenieria.docx", 1) # Punto A
 queue_prioridad.arrive("Trabajo POO.pdf", 1) # Punto A
