@@ -2,7 +2,6 @@ from Pokes import pokemons_db
 from tree import BinaryTree
 from graph import Graph
 from Star_wars import personajes, episodios_compartidos
-from heap import HeapMax
 from stack import Stack
 
 # Ejercicio 1: Se tiene los datos de Pokémons de las 9 generaciones cargados de manera aleatoria (1025 en total) de los cuales se 
@@ -41,6 +40,7 @@ class Pokemons:
         return f"Nombre: {self.name} || Número: {self.num} || Tipos: {self.type} || Debilidades: {self.deb} || Mega evolución: {self.meg} || Gigamax: {self.gig}"
 
 
+# Punto A
 for pokemon in pokemons_db:
     nuevo_poke= Pokemons(pokemon["nombre"], pokemon["numero"], pokemon["tipos"], pokemon["debilidades"], pokemon["mega"], pokemon["gigamax"])
     arbol_nombre.insert_node(nuevo_poke.name, nuevo_poke) # Punto A
@@ -78,16 +78,21 @@ else: # Punto B
 print()
 
 def proxy_por_nombre(self, prefix: str): # Punto B
-        
+    encontrado= [False]    
+    
     def __proxy_por_nombre(root, prefix):
         if root.left is not None:
             __proxy_por_nombre(root.left, prefix)
         if prefix.lower() in root.value.lower():
             print(root.other_values)
+            encontrado[0]= True
         if root.right is not None:
             __proxy_por_nombre(root.right, prefix)
 
-    return __proxy_por_nombre(self.root, prefix)
+    __proxy_por_nombre(self.root, prefix)
+
+    if not encontrado[0]:
+        print("El nombre buscado no es similar a ningún otro.")
 
 nombre_a_buscar= str(input("Ingrese el nombre del pokemon a buscar: ")) # Punto B
 proxy_por_nombre(arbol_nombre, nombre_a_buscar) # Punto B
@@ -135,6 +140,8 @@ print()
 print()
 print("Listado por nivel por nombre: ") # Punto D
 arbol_nombre.by_level() # Punto D
+print()
+print()
 
 
 print("Punto E")
@@ -180,6 +187,7 @@ if existe_tyrantrum: # Punto E
     mostrar_debiles(arbol_tipo, existe_tyrantrum.type)
 else: # Punto E
     print("Tyrantrum no se encuentra en la lista por lo que no se sabe su tipo y que pokemones son debiles a ellos.")
+print()
 
 
 print("Punto F")
