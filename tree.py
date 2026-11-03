@@ -110,7 +110,7 @@ class BinaryTree():
             if root is not None:
             
                 if root.value.upper() == value.upper():
-                    aux = root
+                    aux = root.other_values
                 elif value.upper() < root.value.upper():
                     aux = __search(root.left, value)
                 elif value.upper() > root.value.upper():
@@ -209,7 +209,7 @@ class BinaryTree():
             # input()
             while pendings.size() > 0:
                 node = pendings.attention()
-                print(node.value)
+                print(node.other_values)
                 # input()
                 if node.left is not None:
                     pendings.arrive(node.left)
